@@ -8,7 +8,7 @@ def main():
         if(len(sys.argv) < 3):
             raise Exception('Provide a number as first and symbol as second argument please')
 
-        value = pyperclip.paste().split('\n')
+        value = list(map(lambda x: x.replace('\r', ''), pyperclip.paste().split('\n')))
         offset = int(sys.argv[1])
         symbol = sys.argv[2]
         
@@ -36,12 +36,12 @@ def main():
 def createBanner(value, offset, symbol):
     max_length = len(max(value, key=len)) + (2*int(offset))
     new_strings = [add_offset(x, max_length, symbol) for x in value]
-    print(new_strings)
+    
     print('\n'.join(new_strings))
+    pyperclip.copy('\n'.join(new_strings))
 
 def add_offset(val, max_length, symbol):
     offset = (max_length - len(val))/2 
-    print(offset)
     if not offset.is_integer():
         first_part = math.ceil(offset) 
         second_part = math.floor(offset)
