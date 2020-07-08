@@ -35,20 +35,18 @@ def main():
 
 def createBanner(value, offset, symbol):
     max_length = len(max(value, key=len)) + (2*int(offset))
-    new_strings = [add_offset(x, max_length) for x in value]
-    # print(f'''
-    # {symbol*max_length}
-    # '''.strip())
+    new_strings = [add_offset(x, max_length, symbol) for x in value]
     print(new_strings)
+    print('\n'.join(new_strings))
 
-def add_offset(val, max_length):
+def add_offset(val, max_length, symbol):
     offset = (max_length - len(val))/2 
     print(offset)
     if not offset.is_integer():
         first_part = math.ceil(offset) 
         second_part = math.floor(offset)
-        return (' '*first_part) + val + (' '* second_part)
-    return (' ' * int(offset)) + val + (' '* int(offset))
+        return  symbol + (' '*first_part) + val + (' '* second_part) + symbol
+    return symbol + (' ' * int(offset)) + val + (' '* int(offset)) + symbol
 
 
 # print(sys.argv)
