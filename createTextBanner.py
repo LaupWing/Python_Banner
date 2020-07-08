@@ -1,6 +1,6 @@
 import pyperclip
 import sys
-
+import math
 
 def main():   
     flag = True
@@ -34,28 +34,23 @@ def main():
 
 
 def createBanner(value, offset, symbol):
-    max_length = len(max(value)) + (2*offset)
+    max_length = len(max(value, key=len)) + (2*int(offset))
     new_strings = [add_offset(x, max_length) for x in value]
     # print(f'''
     # {symbol*max_length}
     # '''.strip())
     print(new_strings)
-    print(value)
 
-def add_offset(x, y):
-    isItEven = isEven((y - len(x))/2) 
-    print((y - len(x))/2)
-    print(isItEven)
-    print(y)
-    print('---------------------')
-    return x
+def add_offset(val, max_length):
+    offset = (max_length - len(val))/2 
+    print(offset)
+    if not offset.is_integer():
+        first_part = math.ceil(offset) 
+        second_part = math.floor(offset)
+        return (' '*first_part) + val + (' '* second_part)
+    return (' ' * int(offset)) + val + (' '* int(offset))
 
 
-def isEven(num):
-    if num % 2 == 0:
-        return True 
-    else:
-        return False
 # print(sys.argv)
 main()
 # value = pyperclip.paste()
