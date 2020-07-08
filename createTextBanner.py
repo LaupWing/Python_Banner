@@ -36,8 +36,12 @@ def main():
 def createBanner(value, offset, symbol):
     max_length = len(max(value, key=len)) + (2*int(offset))
     new_strings = [add_offset(x, max_length, symbol) for x in value]
-    
+    border=(max_length+2)*symbol
+    new_strings.insert(0, border)
+    new_strings.append(border)
+
     print('\n'.join(new_strings))
+    
     pyperclip.copy('\n'.join(new_strings))
 
 def add_offset(val, max_length, symbol):
@@ -48,8 +52,4 @@ def add_offset(val, max_length, symbol):
         return  symbol + (' '*first_part) + val + (' '* second_part) + symbol
     return symbol + (' ' * int(offset)) + val + (' '* int(offset)) + symbol
 
-
-# print(sys.argv)
 main()
-# value = pyperclip.paste()
-# print(value.split('\n'))
